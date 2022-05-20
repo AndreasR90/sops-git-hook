@@ -1,0 +1,4 @@
+- id: encrypt
+  name: encrypt
+  entry: encrypt
+  language: python
