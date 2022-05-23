@@ -1,8 +1,16 @@
+import configparser
 import sys
+
+import yaml
+
+config_file = ".secrets.yaml"
 
 
 def main():
-    print("IN MAIN ENCRYTP")
+    configuration = yaml.safe_load(config_file)
+    secrets = configuration["secrets"]
+    for secret in secrets:
+        encrypt_secret(secret)
     sys.exit(1)
 
 

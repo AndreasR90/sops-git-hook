@@ -1,0 +1,22 @@
+{
+    "firstName": "Adam",
+    "lastName": "Eve",
+    "age": 100,
+    "address": {
+        "city": "Boson",
+        "postalCode": "20021-3100",
+        "state": "MS",
+        "streetAddress": "21 2nd Street"
+    },
+    "phoneNumbers": [
+        {
+            "number": "212 555-1234",
+            "type": "mobile"
+        },
+        {
+            "number": "646 555-4567",
+            "type": "office"
+        }
+    ],
+    "anEmptyValue": ""
+}
