@@ -10,4 +10,5 @@ setup(
             "decrypt=sops_git_hooks.cli.decrypt:main_decrypt",
         ]
     },
+    install_requires=["pyyaml"],
 )
