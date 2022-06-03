@@ -30,6 +30,11 @@ jobs:
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.2.0
         id: install
+      - name: Try sop
+        run: |
+          sops -e tests/data/sample.ini
+          echo "HOHOHO"
+          sops -d tests/data/sample.encrypted.ini
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
