@@ -32,6 +32,8 @@ jobs:
         id: install
       - name: Try sop
         run: |
+          export SOPS_PGP_FP="85D77543B3D624B63CEA9E6DBC17301B491B3F21,E60892BB9BD89A69F759A1A0A3D652173B763E8F"
+
           sops -e tests/data/sample.ini
           echo "HOHOHO"
           sops -d tests/data/sample.encrypted.ini
