@@ -33,4 +33,3 @@ class MainReader:
         extension = get_file_extension(filename=filename)
         reader = self[extension]
         return reader.write(content=content, filename=filename)
-

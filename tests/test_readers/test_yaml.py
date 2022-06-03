@@ -6,7 +6,10 @@ converter = YamlConverter()
 
 
 @pytest.mark.parametrize(
-    "filename,expected", [(plaintext_file_yaml, content_yaml),],
+    "filename,expected",
+    [
+        (plaintext_file_yaml, content_yaml),
+    ],
 )
 def test_read_yaml(filename, expected):
     file_content = converter.read(filename=filename)

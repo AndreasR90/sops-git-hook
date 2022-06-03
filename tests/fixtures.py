@@ -32,14 +32,21 @@ content_json = {
 plaintext_file_ini = str(Path(__file__).parent / "data/sample.ini")
 encrypted_file_ini = str(Path(__file__).parent / "data/sample.encrypted.ini")
 content_ini = {
-    "name": {"firstName": "John", "lastName": "Smith", "age": "25.4",},
+    "name": {
+        "firstName": "John",
+        "lastName": "Smith",
+        "age": "25.4",
+    },
     "address": {
         "city": "New York",
         "postalCode": "10021-3100",
         "state": "NY",
         "streetAddress": "21 2nd Street",
     },
-    "phoneNumbers": {"home": "212 555-1234", "office": "646 555-4567",},
+    "phoneNumbers": {
+        "home": "212 555-1234",
+        "office": "646 555-4567",
+    },
     "not private": {"notsecret_unencrypted": "hi there!"},
 }
 

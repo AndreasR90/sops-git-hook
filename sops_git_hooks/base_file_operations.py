@@ -1,10 +1,5 @@
-import configparser
-from dataclasses import dataclass
 import subprocess
-import json
 import re
-import yaml
-from typing import Callable, Dict, Optional, Union
 
 SOPS_REGEX = r"ENC.AES256"
 
@@ -63,4 +58,3 @@ def encrypted_version(filename: str, encrypt_string: str = "encrypted") -> str:
     extension = get_file_extension(filename=filename)
     basename = filename.replace(f".{extension}", "")
     return ".".join([basename, encrypt_string, extension])
-

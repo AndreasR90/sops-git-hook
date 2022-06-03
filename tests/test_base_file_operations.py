@@ -1,6 +1,5 @@
 import json
 import os
-from tempfile import TemporaryFile
 import pytest
 from sops_git_hooks.base_file_operations import (
     encrypted_version,
@@ -17,7 +16,6 @@ from tests.fixtures import (
     content_json,
     encrypted_file_ini,
     encrypted_file_json,
-    content_ini,
 )
 
 
@@ -100,4 +98,3 @@ def test_encrypted_version(filename, encrypt_string, encrypted_version_expected)
 #     filename = plaintext_file_json
 #     encrypted = encrypt_secret(filename)
 #     assert_files_equal(encrypted, encrypted_file_json)
-

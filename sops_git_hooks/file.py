@@ -59,4 +59,3 @@ class FileHandler:
 
     def create_plaintext(self, filename: str) -> PlaintextFile:
         return PlaintextFile(filename=filename, reader=self.reader, config=self.config)
-
