@@ -1,6 +1,4 @@
-from argparse import ArgumentError
 import subprocess
-from typing import Optional
 
 
 class Sops:

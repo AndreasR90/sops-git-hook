@@ -1,16 +1,13 @@
-import configparser
 import sys
-
-import yaml
 
 config_file = ".secrets.yaml"
 
 
 def main():
-    configuration = yaml.safe_load(config_file)
-    secrets = configuration["secrets"]
-    for secret in secrets:
-        encrypt_secret(secret)
+    # configuration = yaml.safe_load(config_file)
+    # secrets = configuration["secrets"]
+    # for secret in secrets:
+    #     encrypt_secret(secret)
     sys.exit(1)
 
 
