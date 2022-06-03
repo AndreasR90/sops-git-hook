@@ -34,7 +34,10 @@ class Sops:
         return plain_text
 
     def _sys_call(self, args):
-        plain_text_byte = subprocess.check_output(args)
+        try:
+            plain_text_byte = subprocess.check_output(args)
+        except Exception as e:
+            raise SopsException(str(e))
         return plain_text_byte
 
     def decrypt(self, filename: str) -> str:

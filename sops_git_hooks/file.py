@@ -1,10 +1,10 @@
 from .readers.main_reader import MainReader
-from .config import Config
+from .config import AppConfig
 from pathlib import Path
 
 
 class EncryptedFile:
-    def __init__(self, filename: str, reader: MainReader, config: Config):
+    def __init__(self, filename: str, reader: MainReader, config: AppConfig):
         self.filename = filename
         self.reader = reader
         self.config = config
@@ -15,7 +15,7 @@ class EncryptedFile:
 
 
 class PlaintextFile:
-    def __init__(self, filename: str, reader: MainReader, config: Config):
+    def __init__(self, filename: str, reader: MainReader, config: AppConfig):
         self.filename = filename
         self.reader = reader
         self.config = config
@@ -50,7 +50,7 @@ class PlaintextFile:
 
 
 class FileHandler:
-    def __init__(self, reader: MainReader, config: Config):
+    def __init__(self, reader: MainReader, config: AppConfig):
         self.reader = reader
         self.config = config
 

@@ -13,10 +13,10 @@ class IniOptions:
 class IniConverter(Converter):
     def __init__(
         self,
-        options: IniOptions = IniOptions(),
+        options: IniOptions = None,
         file_checker: FileChecker = FileChecker(),
     ):
-        self.options = options
+        self.options = options or IniOptions()
         super().__init__(file_checker=file_checker)
 
     def read(self, filename: str) -> Dict:

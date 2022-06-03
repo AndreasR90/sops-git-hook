@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import pytest
-from sops_git_hooks.config import Config
+from sops_git_hooks.config import AppConfig
 from sops_git_hooks.file import FileHandler, PlaintextFile
 from sops_git_hooks.readers.json import JsonConverter
 from sops_git_hooks.readers.main_reader import MainReader
@@ -23,8 +23,8 @@ def reader() -> MainReader:
 
 
 @pytest.fixture
-def config() -> Config:
-    return Config()
+def config() -> AppConfig:
+    return AppConfig()
 
 
 @pytest.fixture

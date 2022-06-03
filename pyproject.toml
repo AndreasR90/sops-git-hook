@@ -1,0 +1,13 @@
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = 'black'
+known_first_party = 'dataanalytics'
+sections = ['FUTURE','STDLIB','FIRSTPARTY','THIRDPARTY','LOCALFOLDER']
+
+[tool.mypy]
+ignore_missing_imports = true
+allow_redefinition = true
+show_error_codes = true
+
