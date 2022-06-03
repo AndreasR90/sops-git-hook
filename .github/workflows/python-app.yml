@@ -33,9 +33,7 @@ jobs:
 
       - name: Try sop
         run: |
-          git clone https://github.com/mozilla/sops.git
-          cd sops
-          gpg --import pgp/sops_functional_tests_key.asc
+          gpg --import tests/sops_functional_tests_key.asc
           sops -e ../tests/data/sample.ini
           echo "HOHOHO"
           sops -d ../tests/data/sample.encrypted.ini
