@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from shutil import ReadError
 import pytest
 from sops_git_hooks.config import Config
 from sops_git_hooks.file import FileHandler, PlaintextFile
