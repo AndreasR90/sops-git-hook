@@ -18,7 +18,6 @@ def decrypt_secret(secret: str, main_reader: MainReader, app_config: AppConfig) 
 
 def main_decrypt():  # config_file: str):
     configuration, app_config = extract_config(config_file=config_file)
-    configuration, app_config = extract_config(config_file=config_file)
     main_reader = setup_main_reader(app_config=app_config)
     created_plain_text = []
     for secret in configuration.secrets:

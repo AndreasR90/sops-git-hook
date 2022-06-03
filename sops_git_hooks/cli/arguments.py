@@ -17,15 +17,15 @@ def setup_main_reader(app_config: AppConfig) -> MainReader:
     file_checker = FileChecker(sops=Sops(app_config.sops_location))
     main_reader = MainReader(file_checker=file_checker)
     for converter in converters:
-
+        option_args = {}
         for extension, values in app_config.readers.items():
             if extension in converter.extensions:
                 option_args = values
-            else:
-                option_args = {}
-            main_reader.register_reader(
-                converter.converter(options=converter.converter_options(**option_args)),
-                extensions=converter.extensions,
-            )
+                break
+
+        main_reader.register_reader(
+            converter.converter(options=converter.converter_options(**option_args)),
+            extensions=converter.extensions,
+        )
 
     return main_reader
