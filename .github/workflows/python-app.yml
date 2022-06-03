@@ -29,8 +29,6 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.2.0
-        with:
-          version: '<version>' # default is latest stable
         id: install
       - name: Lint with flake8
         run: |
