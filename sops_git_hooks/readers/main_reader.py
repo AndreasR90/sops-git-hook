@@ -37,3 +37,6 @@ class MainReader:
 
     def encrypt(self, filename: str):
         return self.file_checker.sops.encrypt(filename=filename)
+
+    def decrypt(self, filename: str):
+        return self.file_checker.sops.decrypt(filename=filename)

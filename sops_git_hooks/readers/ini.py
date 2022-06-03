@@ -17,7 +17,7 @@ class IniConverter(Converter):
         file_checker: FileChecker = FileChecker(),
     ):
         self.options = options or IniOptions()
-        super().__init__(file_checker=file_checker)
+        super().__init__(file_checker=file_checker, options=options)
 
     def read(self, filename: str) -> Dict:
         plain_text = self.file_checker.load_file(filename=filename)
@@ -36,3 +36,6 @@ class IniConverter(Converter):
         config.read_dict(content)
         with open(filename, "w") as file:
             config.write(file)
+
+    def format(self, content: str) -> str:
+        return content

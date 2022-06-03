@@ -19,7 +19,11 @@ class PlaintextFile:
         self.filename = filename
         self.reader = reader
         self.config = config
-        self.content = reader.read(filename=self.filename)
+        self.extension = self.reader.file_checker.get_file_extension(self.filename)
+        if Path(self.filename).is_file():
+            self.content = reader.read(filename=self.filename)
+        else:
+            self.content = None
         self.encrypted_filename = self.reader.file_checker.encrypted_version(
             filename=self.filename, encrypt_string=config.encrypt_string
         )
@@ -38,6 +42,13 @@ class PlaintextFile:
         if overwrite:
             with open(self.encrypted_filename, "w") as file:
                 file.write(encryption)
+
+    def decrypt(self, overwrite=True):
+        decryption = self.reader.decrypt(filename=self.encrypted_filename)
+        decryption = self.reader[self.extension].format(decryption)
+        if overwrite:
+            with open(self.filename, "w") as file:
+                file.write(decryption)
 
     def ensure_latest_encryption(self) -> bool:
         is_latest = self.check_equality()

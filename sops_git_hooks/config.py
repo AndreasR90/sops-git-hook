@@ -8,6 +8,7 @@ import yaml
 class AppConfig:
     encrypt_string: str = "encrypted"
     sops_location: str = "sops"
+    readers: Dict = field(default_factory=dict)
 
 
 @dataclass

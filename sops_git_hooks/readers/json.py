@@ -17,7 +17,7 @@ class JsonConverter(Converter):
         file_checker: FileChecker = FileChecker(),
     ):
         self.options: JsonOptions = options
-        super().__init__(file_checker=file_checker)
+        super().__init__(file_checker=file_checker, options=options)
 
     def write(self, content: Dict, filename: str):
         json.dump(content, open(filename, "w"), indent=self.options.indent)
@@ -25,3 +25,7 @@ class JsonConverter(Converter):
     def read(self, filename):
         plain_text = self.file_checker.load_file(filename=filename)
         return json.loads(plain_text)
+
+    def format(self, content: str) -> str:
+        dictionary = json.loads(content)
+        return json.dumps(dictionary, indent=self.options.indent)

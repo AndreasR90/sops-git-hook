@@ -18,7 +18,7 @@ class YamlConverter(Converter):
     ):
 
         self.options = options
-        super().__init__(file_checker=file_checker)
+        super().__init__(file_checker=file_checker, options=options)
 
     def read(self, filename: str) -> Dict:
         plain_text = self.file_checker.load_file(filename=filename)
@@ -26,3 +26,6 @@ class YamlConverter(Converter):
 
     def write(self, content: Dict, filename: str) -> None:
         yaml.dump(content, open(filename, "w"), sort_keys=self.options.sort_keys)
+
+    def format(self, content: str) -> str:
+        return content
