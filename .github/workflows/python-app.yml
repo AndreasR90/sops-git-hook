@@ -30,7 +30,6 @@ jobs:
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.2.0
         id: install
-
       - name: Import example PGP key
         run: |
           gpg --import tests/sops_functional_tests_key.asc

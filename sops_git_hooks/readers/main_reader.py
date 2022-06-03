@@ -1,5 +1,5 @@
 from typing import Dict, Iterable, Union
-from sops_git_hooks.base_file_operations import get_file_extension
+from sops_git_hooks.base_file_operations import FileChecker
 
 from sops_git_hooks.readers.base import Converter
 
@@ -9,7 +9,8 @@ class ReaderError(Exception):
 
 
 class MainReader:
-    def __init__(self):
+    def __init__(self, file_checker: FileChecker = FileChecker()):
+        self.file_checker: FileChecker = file_checker
         self.readers: Dict[str, Converter] = {}
 
     def register_reader(
@@ -25,11 +26,14 @@ class MainReader:
             raise ReaderError(f"No reader registered for {extension}")
 
     def read(self, filename: str):
-        extension = get_file_extension(filename=filename)
+        extension = self.file_checker.get_file_extension(filename=filename)
         reader = self[extension]
         return reader.read(filename=filename)
 
     def write(self, content: Dict, filename: str):
-        extension = get_file_extension(filename=filename)
+        extension = self.file_checker.get_file_extension(filename=filename)
         reader = self[extension]
         return reader.write(content=content, filename=filename)
+
+    def encrypt(self, filename: str):
+        return self.file_checker.sops.encrypt(filename=filename)

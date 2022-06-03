@@ -7,6 +7,9 @@ class SopsException(Exception):
     pass
 
 
+SOPS_REGEX = r"ENC.AES256"
+
+
 class Sops:
     def __init__(self, location: str = "sops"):
         self.location = location
@@ -26,13 +29,14 @@ class Sops:
 
     def _call(self, args: List[str]) -> str:
         args = [self.location] + args
-        plain_text_byte = subprocess.check_output(args)
+        plain_text_byte = self._sys_call(args)
         plain_text = plain_text_byte.decode()
         return plain_text
+
+    def _sys_call(self, args):
+        plain_text_byte = subprocess.check_output(args)
+        return plain_text_byte
 
     def decrypt(self, filename: str) -> str:
         args = ["--decrypt", filename]
         return self._call(args)
-
-
-sops = Sops()

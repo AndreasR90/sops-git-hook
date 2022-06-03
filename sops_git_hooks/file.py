@@ -1,9 +1,6 @@
-from sops_git_hooks.base_file_operations import encrypted_version
 from .readers.main_reader import MainReader
 from .config import Config
 from pathlib import Path
-
-from .sops import sops
 
 
 class EncryptedFile:
@@ -23,7 +20,7 @@ class PlaintextFile:
         self.reader = reader
         self.config = config
         self.content = reader.read(filename=self.filename)
-        self.encrypted_filename = encrypted_version(
+        self.encrypted_filename = self.reader.file_checker.encrypted_version(
             filename=self.filename, encrypt_string=config.encrypt_string
         )
         self.encrypted_file = self.create_encrypted()
@@ -37,7 +34,7 @@ class PlaintextFile:
         return self.content == self.encrypted_file.content
 
     def encrypt(self, overwrite=True):
-        encryption = sops.encrypt(filename=self.filename)
+        encryption = self.reader.encrypt(filename=self.filename)
         if overwrite:
             with open(self.encrypted_filename, "w") as file:
                 file.write(encryption)

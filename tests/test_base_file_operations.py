@@ -1,14 +1,7 @@
 import json
 import os
 import pytest
-from sops_git_hooks.base_file_operations import (
-    encrypted_version,
-    get_file_extension,
-    is_file_encrypted,
-    load_file,
-    load_plaintext_file,
-    load_decrypted_file,
-)
+from sops_git_hooks.base_file_operations import FileChecker
 from tests.fixtures import (
     plaintext_file_ini,
     plaintext_file_json,
@@ -18,13 +11,15 @@ from tests.fixtures import (
     encrypted_file_json,
 )
 
+file_checker = FileChecker()
+
 
 @pytest.mark.parametrize(
     "filename,expected",
     [("a.json", "json"), ("a.b.json", "json"), ("a", ""), (".a", "")],
 )
 def test_extension(filename, expected):
-    extension = get_file_extension(filename)
+    extension = file_checker.get_file_extension(filename)
     assert extension == expected
 
 
@@ -39,7 +34,7 @@ def test_extension(filename, expected):
     ],
 )
 def test_is_file_encrypted(filename, expected):
-    is_encrypted = is_file_encrypted(filename)
+    is_encrypted = file_checker.is_file_encrypted(filename)
     assert is_encrypted == expected
 
 
@@ -52,19 +47,19 @@ def test_is_file_encrypted(filename, expected):
     ],
 )
 def test_load_file(filename, expected):
-    file_content = load_file(filename)
+    file_content = file_checker.load_file(filename)
     assert json.loads(file_content) == expected
 
 
 def test_load_decrypted_file():
     filename = encrypted_file_json
-    plain_text = load_decrypted_file(filename=filename)
+    plain_text = file_checker.load_decrypted_file(filename=filename)
     assert json.loads(plain_text) == content_json
 
 
 def test_load_plaintext_file():
     filename = plaintext_file_json
-    plain_text = load_plaintext_file(filename=filename)
+    plain_text = file_checker.load_plaintext_file(filename=filename)
     assert json.loads(plain_text) == content_json
 
 
@@ -86,11 +81,11 @@ def assert_files_equal(file1, file2, delete_files=None):
 )
 def test_encrypted_version(filename, encrypt_string, encrypted_version_expected):
     if encrypt_string is not None:
-        encrypted_version_calculated = encrypted_version(
+        encrypted_version_calculated = file_checker.encrypted_version(
             filename, encrypt_string=encrypt_string
         )
     else:
-        encrypted_version_calculated = encrypted_version(filename)
+        encrypted_version_calculated = file_checker.encrypted_version(filename)
     assert encrypted_version_calculated == encrypted_version_expected
 
 
